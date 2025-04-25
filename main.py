@@ -262,7 +262,7 @@ class Processor:
                 ),
                 batch_size=self.arg.batch_size,
                 shuffle=True,
-                num_workers=0,#self.arg.num_worker * len(self.arg.device),
+                num_workers=self.arg.num_worker * len(self.arg.device),
                 drop_last=True,
                 worker_init_fn=init_seed,
             )
