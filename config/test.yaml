@@ -49,7 +49,7 @@ step: [150, 200]
 # training
 device: [0]
 phase: test
-weights: ./path_to_your_model/model.pt
+weights: ./pretrained_models/pretrained_model_for_WLASL2000.pt
 start_epoch: 188
 keep_rate: 0.9
 only_train_epoch: 1

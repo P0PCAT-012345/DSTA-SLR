@@ -262,7 +262,7 @@ class Processor:
                 ),
                 batch_size=self.arg.batch_size,
                 shuffle=True,
-                num_workers=self.arg.num_worker * len(self.arg.device),
+                num_workers=0,#self.arg.num_worker * len(self.arg.device),
                 drop_last=True,
                 worker_init_fn=init_seed,
             )
@@ -295,9 +295,9 @@ class Processor:
                 with open(self.arg.weights, "r") as f:
                     weights = pickle.load(f)
             else:
-                ckpt = torch.load(self.arg.weights)
+                ckpt = torch.load(self.arg.weights, weights_only=False)
                 if "weights" in ckpt.keys():
-                    weights = torch.load(self.arg.weights)["weights"]
+                    weights = torch.load(self.arg.weights, weights_only=False)["weights"]
                 else:
                     weights = ckpt
 
@@ -376,7 +376,7 @@ class Processor:
             raise ValueError()
 
         if self.arg.weights:
-            ckpt = torch.load(self.arg.weights)
+            ckpt = torch.load(self.arg.weights, weights_only=False)
             if "optimizer" in ckpt.keys():
                 opt_state_dict = ckpt["optimizer"]
                 self.optimizer.load_state_dict(opt_state_dict)
@@ -386,7 +386,6 @@ class Processor:
             mode="min",
             factor=0.1,
             patience=10,
-            verbose=True,
             threshold=1e-4,
             threshold_mode="rel",
             cooldown=0,

@@ -13,8 +13,8 @@ train_feeder_args:
   random_mirror_p: 0.5
   is_vector: False
   lap_pe: False
-  bone_stream: False # True or False
-  motion_stream: False # True or False
+  bone_stream: True # True or False
+  motion_stream: True # True or False
 
 test_feeder_args:
   random_mirror: False
@@ -23,8 +23,8 @@ test_feeder_args:
   debug: False
   random_choose: False
   window_size: 120  
-  bone_stream: False # True or False
-  motion_stream: False # True or False
+  bone_stream: True # True or False
+  motion_stream: True # True or False
 
 # model
 model: model.fstgan.Model
@@ -48,7 +48,7 @@ step: [150, 200]
 
 # training
 device: [0]
-# weights: save_models/wlasl_all_attn-187.pt
+weights: ./pretrained_models/pretrained_model_for_WLASL2000.pt
 # start_epoch: 188
 keep_rate: 0.9
 only_train_epoch: 1
@@ -63,5 +63,5 @@ wandb_project: SLGTformer First Run
 wandb_entity: irvl
 wandb_name: Twin Attention, No Shift, 24BS
 
-num_worker: 4
+num_worker: 0
 save_interval: 5
